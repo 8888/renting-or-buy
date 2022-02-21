@@ -94,10 +94,14 @@
 
     const principalAndInterest = (rate, periods, amount) => {
       // M = P [ i(1 + i)^n ] / [ (1 + i)^n – 1]
-      const p = amount;
-      const i = rate / 12;
-      const n = periods;
-      return p * (i * Math.pow(1+i, n)) / (Math.pow(1+i, n) - 1);
+      if (rate) {
+        const p = amount;
+        const i = rate / 12;
+        const n = periods;
+        return p * (i * Math.pow(1+i, n)) / (Math.pow(1+i, n) - 1);
+      } else {
+        return amount / periods;
+      }
     };
 
     const calculate = () => {

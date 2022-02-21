@@ -5,8 +5,22 @@
   <meta name="description" content="A financial calculator to help you determine if it is better to pay rent or to purchase a home.">
   <meta name="viewport" content="width=device-width">
   <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
     h1 {
       color: blue;
+    }
+
+    .user-input-form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input {
+      margin-top: 4px;
+      margin-bottom: 8px;
     }
 
     @media (min-width: 481px) {
@@ -17,7 +31,31 @@
   </style>
 </head>
 <body>
-  <h1 id="heading">Should I rent or buy a home?</h1>
+  <h1>Should I rent or buy a home?</h1>
+  <p>A brief comparison to decide if renting or buying is better in your situation.</p>
+  <div class="user-input-form">
+    <!-- Purchase price -->
+    <label for="purchase-price">Purchase price</label>
+    <input type="number" name="purchase-price" id="purchase-price" value="500000">
+    <!-- Percent down -->
+    <label for="percent-down">Percent down</label>
+    <input type="number" name="percent-down" id="percent-down" value="20">
+    <!-- Tax -->
+    <label for="tax">Property tax rate</label>
+    <input type="number" name="tax" id="tax" value="0.9">
+    <!-- Insurance -->
+    <label for="insurance">Homeowners insurance rate</label>
+    <input type="number" name="insurance" id="insurance" value="0.5">
+    <!-- Common fees -->
+    <label for="common-fees">Monthly common fees</label>
+    <input type="number" name="common-fees" id="common-fees" value="1500">
+    <!-- Interest rate -->
+    <label for="interest-rate">Interest rate</label>
+    <input type="number" name="interest-rate" id="interest-rate" value="1500">
+    <!-- Mortgage term -->
+    <label for="mortgage-term">Mortgage term</label>
+    <input type="number" name="mortgage-term" id="mortgage-term" value="1500">
+  </div>
   <script>
     console.log('hello rent or buy')
   </script>

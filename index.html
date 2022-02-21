@@ -9,8 +9,9 @@
       font-family: Arial, Helvetica, sans-serif;
     }
 
-    h1 {
-      color: blue;
+    .container {
+      display: flex;
+      flex-direction: column;
     }
 
     .user-input-form {
@@ -24,8 +25,12 @@
     }
 
     @media (min-width: 481px) {
-      h1 {
-        color: red;
+      .container {
+        flex-direction: row;
+      }
+
+      .results {
+        margin-left: 16px;
       }
     }
   </style>
@@ -34,38 +39,41 @@
   <h1>Should I rent or buy a home?</h1>
   <p>A brief comparison to decide if renting or buying is better in your situation.</p>
 
-  <div class="user-input-form" id="user-input-form">
-    <!-- Purchase price -->
-    <label for="purchase-price">Purchase price</label>
-    <input type="number" name="purchase-price" id="purchase-price" value="500000">
-    <!-- Percent down -->
-    <label for="percent-down">Percent down</label>
-    <input type="number" name="percent-down" id="percent-down" value="20">
-    <!-- Tax -->
-    <label for="tax">Property tax rate</label>
-    <input type="number" name="tax" id="tax" value="0.9">
-    <!-- Insurance -->
-    <label for="insurance">Homeowners insurance rate</label>
-    <input type="number" name="insurance" id="insurance" value="0.5">
-    <!-- Common fees -->
-    <label for="common-fees">Monthly common fees</label>
-    <input type="number" name="common-fees" id="common-fees" value="1500">
-    <!-- Interest rate -->
-    <label for="interest-rate">Interest rate</label>
-    <input type="number" name="interest-rate" id="interest-rate" value="3">
-    <!-- Mortgage term -->
-    <label for="mortgage-term">Mortgage term</label>
-    <input type="number" name="mortgage-term" id="mortgage-term" value="30">
-    <!-- Length of stay -->
-    <label for="length-of-stay">Length of stay</label>
-    <input type="number" name="length-of-stay" id="length-of-stay" value="5">
+  <div class="container">
+    <div class="user-input-form" id="user-input-form">
+      <!-- Purchase price -->
+      <label for="purchase-price">Purchase price</label>
+      <input type="number" name="purchase-price" id="purchase-price" value="500000">
+      <!-- Percent down -->
+      <label for="percent-down">Percent down</label>
+      <input type="number" name="percent-down" id="percent-down" value="20">
+      <!-- Tax -->
+      <label for="tax">Property tax rate</label>
+      <input type="number" name="tax" id="tax" value="0.9">
+      <!-- Insurance -->
+      <label for="insurance">Homeowners insurance rate</label>
+      <input type="number" name="insurance" id="insurance" value="0.5">
+      <!-- Common fees -->
+      <label for="common-fees">Monthly common fees</label>
+      <input type="number" name="common-fees" id="common-fees" value="1500">
+      <!-- Interest rate -->
+      <label for="interest-rate">Interest rate</label>
+      <input type="number" name="interest-rate" id="interest-rate" value="3">
+      <!-- Mortgage term -->
+      <label for="mortgage-term">Mortgage term</label>
+      <input type="number" name="mortgage-term" id="mortgage-term" value="30">
+      <!-- Length of stay -->
+      <label for="length-of-stay">Length of stay</label>
+      <input type="number" name="length-of-stay" id="length-of-stay" value="5">
+    </div>
+
+    <div class="results">
+      <p>If you can rent a home of similair value to you for</p>
+      <h2 id="rent-results"></h2>
+      <p>then renting is better!</p>
+    </div>
   </div>
 
-  <div class="results">
-    <p>If you can rent a home of similair value to you for</p>
-    <h2 id="rent-results"></h2>
-    <p>then renting is better!</p>
-  </div>
   <script type="text/javascript">
     const userValues = {
       price: 0,

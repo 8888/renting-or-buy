@@ -33,6 +33,7 @@
 <body>
   <h1>Should I rent or buy a home?</h1>
   <p>A brief comparison to decide if renting or buying is better in your situation.</p>
+
   <div class="user-input-form" id="user-input-form">
     <!-- Purchase price -->
     <label for="purchase-price">Purchase price</label>
@@ -58,6 +59,12 @@
     <!-- Length of stay -->
     <label for="length-of-stay">Length of stay</label>
     <input type="number" name="length-of-stay" id="length-of-stay" value="5">
+  </div>
+
+  <div class="results">
+    <p>If you can rent a home of similair value to you for</p>
+    <h2 id="rent-results"></h2>
+    <p>then renting is better!</p>
   </div>
   <script type="text/javascript">
     const userValues = {
@@ -91,8 +98,20 @@
       userValues.interestRate = document.getElementById('interest-rate').value / 100;
       userValues.term = document.getElementById('mortgage-term').value * 12;
       userValues.lengthOfStay = document.getElementById('length-of-stay').value * 12;
+    };
 
+    const updateResults = () => {
+      document.getElementById('rent-results').innerHTML = `$${computedValues.rent}`;
+    };
+
+    const update = () => {
+      gatherInput();
       calculate();
+      updateResults();
+    };
+
+    const round = (x) => {
+      return +(Math.round(x + 'e+2') + 'e-2');
     };
 
     const downPayment = (price, percent) => {
@@ -161,7 +180,7 @@
       computedValues.insurance = monthlyInsurance(userValues.insurance, userValues.price);
       computedValues.piti = monthlyPiti(computedValues.pi, computedValues.tax, computedValues.insurance);
       computedValues.monthlyPayment = monthlyPayment(computedValues.piti, userValues.commonFees);
-      computedValues.rent = rentalAmount(
+      computedValues.rent = round(rentalAmount(
         computedValues.loanAmount,
         userValues.lengthOfStay,
         userValues.interestRate,
@@ -169,11 +188,11 @@
         computedValues.tax,
         computedValues.insurance,
         userValues.commonFees,
-      );
+      ));
     };
 
-    document.getElementById('user-input-form').addEventListener('input', gatherInput);
-    gatherInput();
+    document.getElementById('user-input-form').addEventListener('input', update);
+    update();
   </script>
 </body>
 </html>

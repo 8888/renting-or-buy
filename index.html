@@ -58,28 +58,47 @@
   </div>
   <script type="text/javascript">
     const userValues = {
-      price: 500000,
-      percentDown: .20,
-      tax: .009,
-      insurance: .005,
-      commonFees: 1500,
-      interestRate: .03,
-      term: 360,
+      price: 0,
+      percentDown: 0,
+      tax: 0,
+      insurance: 0,
+      commonFees: 0,
+      interestRate: 0,
+      term: 0,
+    };
+
+    const computedValues = {
+      downPayment: 0,
+      loanAmount: 0,
     };
 
     const gatherInput = () => {
       userValues.price = document.getElementById('purchase-price').value;
-      userValues.percentDown = document.getElementById('percent-down').value;
-      userValues.tax = document.getElementById('tax').value;
-      userValues.insurance = document.getElementById('insurance').value;
+      userValues.percentDown = document.getElementById('percent-down').value / 100;
+      userValues.tax = document.getElementById('tax').value / 100;
+      userValues.insurance = document.getElementById('insurance').value / 100;
       userValues.commonFees = document.getElementById('common-fees').value;
-      userValues.interestRate = document.getElementById('interest-rate').value;
-      userValues.term = document.getElementById('mortgage-term').value;
+      userValues.interestRate = document.getElementById('interest-rate').value / 100;
+      userValues.term = document.getElementById('mortgage-term').value * 12;
 
-      console.log(userValues);
+      calculate();
+    };
+
+    const downPayment = (price, percent) => {
+      return price * percent;
+    }
+
+    const loanAmount = (price, down) => {
+      return price - down;
+    }
+
+    const calculate = () => {
+      computedValues.downPayment = downPayment(userValues.price, userValues.percentDown);
+      computedValues.loanAmount = loanAmount(userValues.price, computedValues.downPayment);
     };
 
     document.getElementById('user-input-form').addEventListener('input', gatherInput);
+    gatherInput();
   </script>
 </body>
 </html>

@@ -92,9 +92,18 @@
       return price - down;
     }
 
+    const principalAndInterest = (rate, periods, amount) => {
+      // M = P [ i(1 + i)^n ] / [ (1 + i)^n – 1]
+      const p = amount;
+      const i = rate / 12;
+      const n = periods;
+      return p * (i * Math.pow(1+i, n)) / (Math.pow(1+i, n) - 1);
+    };
+
     const calculate = () => {
       computedValues.downPayment = downPayment(userValues.price, userValues.percentDown);
       computedValues.loanAmount = loanAmount(userValues.price, computedValues.downPayment);
+      computedValues.pi = principalAndInterest(userValues.interestRate, userValues.term, computedValues.loanAmount);
     };
 
     document.getElementById('user-input-form').addEventListener('input', gatherInput);

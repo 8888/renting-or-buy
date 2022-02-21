@@ -70,6 +70,10 @@
     const computedValues = {
       downPayment: 0,
       loanAmount: 0,
+      pi: 0,
+      tax: 0,
+      insurance: 0,
+      piti: 0,
     };
 
     const gatherInput = () => {
@@ -104,10 +108,25 @@
       }
     };
 
+    const monthlyTax = (tax, price) => {
+      return tax * price / 12;
+    }
+
+    const monthlyInsurance = (insurance, price) => {
+      return insurance * price / 12;
+    }
+
+    const monthlyPiti = (pi, tax, insurance) => {
+      return pi + tax + insurance;
+    };
+
     const calculate = () => {
       computedValues.downPayment = downPayment(userValues.price, userValues.percentDown);
       computedValues.loanAmount = loanAmount(userValues.price, computedValues.downPayment);
       computedValues.pi = principalAndInterest(userValues.interestRate, userValues.term, computedValues.loanAmount);
+      computedValues.tax = monthlyTax(userValues.tax, userValues.price);
+      computedValues.insurance = monthlyInsurance(userValues.insurance, userValues.price);
+      computedValues.piti = monthlyPiti(computedValues.pi, computedValues.tax, computedValues.insurance);
     };
 
     document.getElementById('user-input-form').addEventListener('input', gatherInput);

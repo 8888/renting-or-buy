@@ -33,7 +33,7 @@
 <body>
   <h1>Should I rent or buy a home?</h1>
   <p>A brief comparison to decide if renting or buying is better in your situation.</p>
-  <div class="user-input-form">
+  <div class="user-input-form" id="user-input-form">
     <!-- Purchase price -->
     <label for="purchase-price">Purchase price</label>
     <input type="number" name="purchase-price" id="purchase-price" value="500000">
@@ -51,13 +51,35 @@
     <input type="number" name="common-fees" id="common-fees" value="1500">
     <!-- Interest rate -->
     <label for="interest-rate">Interest rate</label>
-    <input type="number" name="interest-rate" id="interest-rate" value="1500">
+    <input type="number" name="interest-rate" id="interest-rate" value="3">
     <!-- Mortgage term -->
     <label for="mortgage-term">Mortgage term</label>
-    <input type="number" name="mortgage-term" id="mortgage-term" value="1500">
+    <input type="number" name="mortgage-term" id="mortgage-term" value="30">
   </div>
-  <script>
-    console.log('hello rent or buy')
+  <script type="text/javascript">
+    const userValues = {
+      price: 500000,
+      percentDown: .20,
+      tax: .009,
+      insurance: .005,
+      commonFees: 1500,
+      interestRate: .03,
+      term: 360,
+    };
+
+    const gatherInput = () => {
+      userValues.price = document.getElementById('purchase-price').value;
+      userValues.percentDown = document.getElementById('percent-down').value;
+      userValues.tax = document.getElementById('tax').value;
+      userValues.insurance = document.getElementById('insurance').value;
+      userValues.commonFees = document.getElementById('common-fees').value;
+      userValues.interestRate = document.getElementById('interest-rate').value;
+      userValues.term = document.getElementById('mortgage-term').value;
+
+      console.log(userValues);
+    };
+
+    document.getElementById('user-input-form').addEventListener('input', gatherInput);
   </script>
 </body>
 </html>

@@ -4,7 +4,7 @@ import { CloudFrontAllowedMethods, CloudFrontWebDistribution, OriginAccessIdenti
 import { BlockPublicAccess, Bucket } from 'aws-cdk-lib/aws-s3';
 import { CanonicalUserPrincipal, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
-import { AaaaRecord, PublicHostedZone, RecordTarget } from 'aws-cdk-lib/aws-route53';
+import { AaaaRecord, ARecord, PublicHostedZone, RecordTarget } from 'aws-cdk-lib/aws-route53';
 import { CloudFrontTarget } from 'aws-cdk-lib/aws-route53-targets';
 
 export class RentingOrBuyInfraStack extends Stack {
@@ -54,7 +54,12 @@ export class RentingOrBuyInfraStack extends Stack {
       zoneName: 'rentingorbuy.com',
     });
 
-    new AaaaRecord(this, 'Alias', {
+    new ARecord(this, 'aAlias', {
+      zone: hostedZone,
+      target: RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
+    });
+
+    new AaaaRecord(this, 'aaaaAlias', {
       zone: hostedZone,
       target: RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
     });
